@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastelería Patty | Dulces Momentos - SliceCake</title>
+    <style>
+        /* Paleta Corporativa Oficial */
+        :root {
+            --cafe-oscuro: #4A2222;
+            --rosa-fuerte: #E67EA9;
+            --rosa-medio: #FCB0D1;
+            --rosa-claro: #FCEBF2;
+            --rosa-pastel: #F8A7C0;
+            --blanco: #FFFFFF;
+            --gris-claro: #fcf8f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gris-claro);
+            color: var(--cafe-oscuro);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: var(--blanco);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(74, 34, 34, 0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilo para el logo en imagen */
+        .navbar-logo {
+            height: 70px; /* Altura ideal para el menú */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cafe-oscuro);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--rosa-fuerte);
+        }
+
+        .cart-btn {
+            background-color: var(--rosa-claro);
+            border: 2px solid var(--rosa-medio);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--cafe-oscuro);
+            position: relative;
+        }
+
+        .cart-count {
+            background-color: var(--rosa-fuerte);
+            color: var(--blanco);
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, #fff0f5 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "🧁";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            left: 5%;
+            top: 10%;
+        }
+
+        .hero::after {
+            content: "🎂";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            right: 5%;
+            bottom: 10%;
+        }
+
+        .hero-badge {
+            background-color: var(--blanco);
+            border: 1px solid var(--rosa-medio);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+            color: var(--rosa-fuerte);
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: var(--cafe-oscuro);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            color: #613636;
+        }
+
+        /* Menu Section */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .section-title h3 {
+            font-size: 28px;
+            color: var(--cafe-oscuro);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h3::after {
+            content: "";
+            width: 50px;
+            height: 3px;
+            background-color: var(--rosa-fuerte);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cake-card {
+            background-color: var(--blanco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(230, 126, 169, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cake-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(230, 126, 169, 0.15);
+        }
+
+        .cake-img-container {
+            width: 100%;
+            height: 220px;
+            background-color: #f5f5f5;
+            position: relative;
+        }
+
+        .cake-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cake-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--rosa-fuerte);
+            color: var(--blanco);
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .cake-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .cake-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--cafe-oscuro);
+        }
+
+        .cake-desc {
+            font-size: 14px;
+            color: #7a5c5c;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .cake-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .cake-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cafe-oscuro);
+        }
+
+        .add-to-cart {
+            background-color: var(--rosa-fuerte);
+            color: var(--blanco);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--cafe-oscuro);
+        }
+
+        /* Sistema "Crea Tu Pastel" */
+        .builder-section {
+            background-color: var(--blanco);
+            padding: 60px 40px;
+            max-width: 1000px;
+            margin: 40px auto 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(74, 34, 34, 0.05);
+            border: 2px solid var(--rosa-claro);
+        }
+
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .builder-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .builder-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .option-group {
+            border: 1px solid var(--rosa-claro);
+            padding: 15px;
+            border-radius: 12px;
+            background-color: var(--gris-claro);
+        }
+
+        .option-group h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: var(--cafe-oscuro);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .selector-item {
+            position: relative;
+        }
+
+        .selector-item input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .selector-label {
+            display: block;
+            background-color: var(--blanco);
+            border: 2px solid var(--rosa-claro);
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .selector-item input:checked + .selector-label {
+            border-color: var(--rosa-fuerte);
+            background-color: var(--rosa-claro);
+            font-weight: 600;
+        }
+
+        /* Checkboxes para toppings */
+        .selector-label-check::before {
+            content: "⬜ ";
+        }
+        .selector-item input:checked + .selector-label-check::before {
+            content: "✅ ";
+        }
+
+        /* Preview del Pastel */
+        .builder-preview {
+            background: linear-gradient(180deg, var(--rosa-claro) 0%, #fff);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--rosa-medio);
+            text-align: center;
+        }
+
+        .cake-visualizer {
+            width: 160px;
+            height: 180px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .visual-layer {
+            width: 100%;
+            height: 40px;
+            background-color: #f3d5c0; /* Color base bizcocho */
+            border-radius: 6px;
+            margin-top: 4px;
+            border: 2px solid var(--blanco);
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .visual-layer-filling {
+            width: 90%;
+            height: 12px;
+            background-color: #8b5a2b; /* Relleno */
+            border-radius: 3px;
+            margin-top: 2px;
+            transition: background-color 0.3s;
+        }
+
+        .visual-topping {
+            font-size: 24px;
+            position: absolute;
+            top: -25px;
+            z-index: 10;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .summary-box {
+            width: 100%;
+            background-color: var(--blanco);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            text-align: left;
+        }
+
+        .summary-title {
+            font-weight: 700;
+            border-bottom: 1px solid var(--rosa-claro);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .total-price-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px solid var(--rosa-claro);
+        }
+
+        .total-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--cafe-oscuro);
+        }
+
+        /* Carrito / Modal lateral */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background-color: var(--blanco);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--rosa-claro);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--cafe-oscuro);
+        }
+
+        .cart-items-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--rosa-claro);
+        }
+
+        .cart-item-details h5 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .cart-item-details p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .cart-checkout-btn {
+            background-color: #25D366; /* Verde WhatsApp */
+            color: var(--blanco);
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .cart-checkout-btn:hover {
+            opacity: 0.9;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--cafe-oscuro);
+            color: var(--blanco);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-container">
+            <!-- AQUÍ SE INSERTA EL LOGO -->
+            <img src="logo.jpeg" alt="Logo Pastelería Patty" class="navbar-logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#menu">Menú Porciones</a></li>
+            <li><a href="#builder">Crea tu Pastel</a></li>
+            <li>
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 Carrito <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="hero-badge">Propuesta de Emprendimiento: SliceCake</span>
+        <h2>Tu porción ideal, a tu medida.</h2>
+        <p>Una experiencia premium de repostería artesanal en formato práctico e individual. ¡Y ahora también puedes diseñar el pastel entero de tus sueños desde cero!</p>
+        <a href="#builder" class="btn-principal" style="background-color: var(--rosa-fuerte); color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block;">¡Diseñar Mi Pastel Ahora!</a>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" style="padding-top: 20px;">
+        <div class="section-title">
+            <h3>Nuestras Porciones Premium (SliceCake)</h3>
+        </div>
+        <div class="menu-grid">
+            <!-- Card 1 -->
+            <div class="cake-card">
+                <div class="cake-img-container">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Slice Cake Chocolate" class="cake-img">
+                    <span class="cake-badge">Popular</span>
+                </div>
+                <div class="cake-info">
+                    <div class="cake-name">Slice Chocolate Supremo</div>
+                    <div class="cake-desc">Bizcocho húmedo de chocolate con triple capa de fudge artesanal y chispas de chocolate premium.</div>
+                    <div class="cake-footer">
+                        <div class="cake-price">C$ 120.00</div>
+                        <button class="add-to-cart" onclick="addStandardItem('Slice Chocolate Supremo', 120)">Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="cake-card">
+                <div class="cake-img-container">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80" alt="Slice Frutos Rojos" class="cake-img">
+                    <span class="cake-badge">Artesanal</span>
+                </div>
+                <div class="cake-info">
+                    <div class="cake-name">Slice Fresa & Crema Vanilla</div>
+                    <div class="cake-desc">Suave bizcocho de vainilla embebido en almíbar ligero, relleno de crema pastelera y fresas frescas de temporada.</div>
+                    <div class="cake-footer">
+                        <div class="cake-price">C$ 110.00</div>
+                        <button class="add-to-cart" onclick="addStandardItem('Slice Fresa & Crema Vanilla', 110)">Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="cake-card">
+                <div class="cake-img-container">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80" alt="Slice Dulce de Leche" class="cake-img">
+                    <span class="cake-badge">Premium</span>
+                </div>
+                <div class="cake-info">
+                    <div class="cake-name">Slice Manjar y Caramelo</div>
+                    <div class="cake-desc">Combinación perfecta de masa chiffon esponjosa, abundante dulce de leche y un sutil toque de salsa de caramelo.</div>
+                    <div class="cake-footer">
+                        <div class="cake-price">C$ 125.00</div>
+                        <button class="add-to-cart" onclick="addStandardItem('Slice Manjar y Caramelo', 125)">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Builder Section -->
+    <section id="builder" style="background-color: var(--rosa-claro); padding: 20px 0 10px 0;">
+        <div class="section-title">
+            <h3>Crea Tu Pastel a la Medida</h3>
+        </div>
+        
+        <div class="builder-section">
+            <p style="text-align: center; color: var(--cafe-oscuro); font-weight: 500; margin-bottom: 20px;">
+                Elige los ingredientes, el tamaño y la decoración. Calcularemos el precio estimado al instante.
+            </p>
+
+            <div class="builder-grid">
+                <!-- Opciones de Selección -->
+                <div class="builder-options">
+                    
+                    <!-- Tamaño -->
+                    <div class="option-group">
+                        <h4>Tamaño del Pastel <span id="lbl-size-price">+C$ 0</span></h4>
+                        <div class="selector-grid">
+                            <div class="selector-item">
+                                <input type="radio" id="size-1" name="cake-size" value="Mediano (10-12 pers)" data-price="450" checked onchange="updateBuilder()">
+                                <label for="size-1" class="selector-label">Mediano (10-12 pers)<br><strong>C$ 450</strong></label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="size-2" name="cake-size" value="Grande (20-25 pers)" data-price="750" onchange="updateBuilder()">
+                                <label for="size-2" class="selector-label">Grande (20-25 pers)<br><strong>C$ 750</strong></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bizcocho -->
+                    <div class="option-group">
+                        <h4>Masa / Bizcocho</h4>
+                        <div class="selector-grid">
+                            <div class="selector-item">
+                                <input type="radio" id="flavor-1" name="cake-flavor" value="Vainilla Tradicional" data-color="#f3d5c0" checked onchange="updateBuilder()">
+                                <label for="flavor-1" class="selector-label">Vainilla</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="flavor-2" name="cake-flavor" value="Chocolate Intenso" data-color="#54382b" onchange="updateBuilder()">
+                                <label for="flavor-2" class="selector-label">Chocolate</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="flavor-3" name="cake-flavor" value="Red Velvet Premium" data-color="#a62626" onchange="updateBuilder()">
+                                <label for="flavor-3" class="selector-label">Red Velvet</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="flavor-4" name="cake-flavor" value="Zanahoria & Nuez" data-color="#d98236" onchange="updateBuilder()">
+                                <label for="flavor-4" class="selector-label">Zanahoria</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Relleno -->
+                    <div class="option-group">
+                        <h4>Relleno Crema</h4>
+                        <div class="selector-grid">
+                            <div class="selector-item">
+                                <input type="radio" id="fill-1" name="cake-filling" value="Dulce de Leche" data-color="#b07d4e" checked onchange="updateBuilder()">
+                                <label for="fill-1" class="selector-label">Dulce de Leche</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="fill-2" name="cake-filling" value="Chocolate Fudge" data-color="#3d2516" onchange="updateBuilder()">
+                                <label for="fill-2" class="selector-label">Fudge de Chocolate</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="radio" id="fill-3" name="cake-filling" value="Crema de Fresa" data-color="#f2a2b3" onchange="updateBuilder()">
+                                <label for="fill-3" class="selector-label">Crema de Fresa</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toppings / Extras -->
+                    <div class="option-group">
+                        <h4>Toppings y Decoración (Opcionales)</h4>
+                        <div class="selector-grid">
+                            <div class="selector-item">
+                                <input type="checkbox" id="top-1" name="cake-topping" value="Chispas de Chocolate" data-price="40" data-emoji="🍫" onchange="updateBuilder()">
+                                <label for="top-1" class="selector-label selector-label-check">Chispas (+C$40)</label>
+                            </div>
+                            <div class="selector-item">
+                                <input type="checkbox" id="top-2" name="cake-topping" value="Fresas Naturales" data-price="60" data-emoji="🍓" onchange="updateBuilder()">
+                                <label for="top-2" class="selector-label selector-label-check">Fresas (+C$60)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Preview Visual e Instantáneo -->
+                <div class="builder-preview">
+                    <h4 style="margin-bottom: 20px; color: var(--cafe-oscuro);">Tu Pastel Interactiva</h4>
+                    
+                    <div class="cake-visualizer">
+                        <div class="visual-layer" id="layer1"></div>
+                        <div class="visual-layer-filling" id="layerFill1"></div>
+                        <div class="visual-layer" id="layer2"></div>
+                        <div class="visual-topping" id="visualTopping">🎂</div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-title">Resumen de Combinación</div>
+                        <div class="summary-item"><span>Tamaño:</span> <strong id="sum-size">-</strong></div>
+                        <div class="summary-item"><span>Masa:</span> <strong id="sum-flavor">-</strong></div>
+                        <div class="summary-item"><span>Relleno:</span> <strong id="sum-filling">-</strong></div>
+                        <div class="summary-item"><span>Toppings:</span> <strong id="sum-toppings">Ninguno</strong></div>
+                        
+                        <div class="total-price-box">
+                            <span>Precio:</span>
+                            <div class="total-price" id="builderPrice">C$ 450.00</div>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart" style="width: 100%; padding: 12px; margin-top: 20px; font-size: 15px;" onclick="addCustomCakeToCart()">
+                        ✨ Agregar Pastel Personalizado al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrito Lateral (Sidebar) -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h4>Tu Pedido Dulce</h4>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items-container" id="cartItems">
+            <!-- Items agregados se listarán aquí dinámicamente -->
+            <p style="text-align: center; color: #999; margin-top: 40px;" id="emptyCartMsg">Tu carrito está vacío todavía.</p>
+        </div>
+        
+        <div style="border-top: 2px solid var(--rosa-claro); padding-top: 15px; margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-bottom: 15px;">
+                <span>Total Estimado:</span>
+                <span id="cartTotal">C$ 0.00</span>
+            </div>
+            <button class="cart-checkout-btn" onclick="checkoutWhatsApp()">
+                💬 Enviar Pedido a WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Aquí también puedes poner una imagen de logo si gustas en el futuro -->
+        <h3>Pastelería Patty</h3>
+        <p>"Dulces Momentos"</p>
+        <p style="font-size: 12px; margin-top: 25px; opacity: 0.6;">© 2026 Pastelería Patty - SliceCake. Diseñado para repostería moderna en Managua, Nicaragua.</p>
+    </footer>
+
+    <!-- Sistema Lógico de Ventas y Carrito en JavaScript Puro -->
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function updateBuilder() {
+            const sizeRadio = document.querySelector('input[name="cake-size"]:checked');
+            const flavorRadio = document.querySelector('input[name="cake-flavor"]:checked');
+            const fillingRadio = document.querySelector('input[name="cake-filling"]:checked');
+            const toppingsCheckboxes = document.querySelectorAll('input[name="cake-topping"]:checked');
+
+            let basePrice = parseInt(sizeRadio.getAttribute('data-price'));
+            let flavorColor = flavorRadio.getAttribute('data-color');
+            let fillingColor = fillingRadio.getAttribute('data-color');
+
+            let toppingsText = [];
+            let toppingsEmoji = "🎂";
+            toppingsCheckboxes.forEach(cb => {
+                basePrice += parseInt(cb.getAttribute('data-price'));
+                toppingsText.push(cb.value);
+                toppingsEmoji = cb.getAttribute('data-emoji');
+            });
+
+            document.getElementById('layer1').style.backgroundColor = flavorColor;
+            document.getElementById('layer2').style.backgroundColor = flavorColor;
+            document.getElementById('layerFill1').style.backgroundColor = fillingColor;
+            document.getElementById('visualTopping').innerText = toppingsEmoji;
+
+            document.getElementById('sum-size').innerText = sizeRadio.value;
+            document.getElementById('sum-flavor').innerText = flavorRadio.value;
+            document.getElementById('sum-filling').innerText = fillingRadio.value;
+            document.getElementById('sum-toppings').innerText = toppingsText.length > 0 ? toppingsText.join(', ') : "Ninguno";
+            
+            document.getElementById('builderPrice').innerText = "C$ " + basePrice + ".00";
+        }
+
+        function addStandardItem(name, price) {
+            cart.push({
+                type: 'standard',
+                name: name,
+                price: price,
+                details: 'Porción individual premium SliceCake'
+            });
+            updateCartUI();
+            toggleCart();
+        }
+
+        function addCustomCakeToCart() {
+            const size = document.querySelector('input[name="cake-size"]:checked').value;
+            const flavor = document.querySelector('input[name="cake-flavor"]:checked').value;
+            const filling = document.querySelector('input[name="cake-filling"]:checked').value;
+            const toppingsCheckboxes = document.querySelectorAll('input[name="cake-topping"]:checked');
+            
+            let toppingsText = [];
+            let price = parseInt(document.querySelector('input[name="cake-size"]:checked').getAttribute('data-price'));
+            
+            toppingsCheckboxes.forEach(cb => {
+                price += parseInt(cb.getAttribute('data-price'));
+                toppingsText.push(cb.value);
+            });
+
+            cart.push({
+                type: 'custom',
+                name: 'Pastel Personalizado ' + size.split(' ')[0],
+                price: price,
+                details: `Masa: ${flavor} | Relleno: ${filling} | Toppings: ${toppingsText.length > 0 ? toppingsText.join(', ') : 'Ninguno'}`
+            });
+
+            updateCartUI();
+            toggleCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const container = document.getElementById('cartItems');
+            const emptyMsg = document.getElementById('emptyCartMsg');
+            
+            container.innerHTML = '';
+            
+            if(cart.length === 0) {
+                container.appendChild(emptyMsg);
+                document.getElementById('cartTotal').innerText = "C$ 0.00";
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-details">
+                        <h5>${item.name}</h5>
+                        <p>${item.details}</p>
+                        <strong>C$ ${item.price}.00</strong>
+                    </div>
+                    <button class="remove-item" onclick="removeItem(${index})">Eliminar</button>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('cartTotal').innerText = "C$ " + total + ".00";
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) {
+                alert('Tu carrito está vacío. Agrega una porción o diseña tu pastel primero.');
+                return;
+            }
+
+            let message = "¡Hola Pastelería Patty! 🎉 Me gustaría realizar un pedido desde la página web:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                message += `${index + 1}. *${item.name}*\n`;
+                message += `   Detalle: ${item.details}\n`;
+                message += `   Precio: C$ ${item.price}.00\n\n`;
+            });
+
+            message += `*Total Estimado a Pagar: C$ ${total}.00*\n\n`;
+            message += "Por favor, confírmenme disponibilidad para acordar la entrega y el pago. ¡Gracias! ✨";
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/50557811629?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+        window.onload = function() {
+            updateBuilder();
+        };
+    </script>
+</body>
+</html>
